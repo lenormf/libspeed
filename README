@@ -1,0 +1,6 @@
+
+tsoob
+
+This library implements a few boost objects, such as functors, the lexical_cast
+function, or typelists. Although the tests happen to use the C++11 standard,
+tsoob is supposedly fully C++03 compatible.
