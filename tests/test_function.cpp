@@ -1,24 +1,23 @@
 /*
- * test_function.cpp foir tsoob
+ * test_function.cpp for libspeed
  * by lenorm_f
  */
 
 #include <cstdio>
-#include <iostream>
-#include <functional>
+#include <bind.hpp>
 #include <function.hpp>
 
 void empty() {}
 
 int main() {
-	tsoob::Function<void()> ref = &empty;
-	tsoob::Function<void()> f = ref;
+	speed::Function<void()> ref = &empty;
+	speed::Function<void()> f = ref;
 
 	f();
-	f = std::bind(&empty);
+	f = speed::Bind(&empty);
 	f();
 
-	tsoob::Function<int(char const*)> ff = &::puts;
+	speed::Function<int(char const*)> ff = &::puts;
 
 	ff("oui");
 }

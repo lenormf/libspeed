@@ -1,16 +1,15 @@
 /*
- * lexical_cast.hpp for tsoob
+ * lexical_cast.hpp for libspeed
  * by lenorm_f
  */
 
-#ifndef __LEXICAL_CAST_H__
-#define __LEXICAL_CAST_H__
+#pragma once
 
 #include <stringstream>
 
-namespace tsoob {
-template<typename T>
-T lexical_cast(std::string const &s) {
+namespace speed {
+template<typename T, typename U>
+T LexicalCast(U const &s) {
 	T _v;
 	std::sstream ss(s, std::ios_base::in);
 
@@ -19,5 +18,3 @@ T lexical_cast(std::string const &s) {
 	return _v;
 }
 }
-
-#endif

@@ -1,5 +1,5 @@
 /*
- * function.hpp for tsoob
+ * function.hpp for libspeed
  * by lenorm_f
  */
 
@@ -90,7 +90,7 @@ class Function<R(FUNCTION_TYPES)> {
 #ifndef __FUNCTION_H__
 #define __FUNCTION_H__
 
-namespace tsoob {
+namespace speed {
 template<typename T>
 class Function;
 

@@ -1,17 +1,20 @@
 ##
-## Makefile for tsoob
+## Makefile for libspeed
 ## by lenorm_f
 ##
 
-NAME = tsoob
+NAME = libspeed$(LIB_SUFFIX)
+LIB_SUFFIX = .so
 
 CXX = g++
 CXXFLAGS = -Wall -Wextra
+LDFLAGS =
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 all:
+	$(CXX) $(LDFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -21,5 +24,7 @@ distclean: clean
 
 re: distclean all
 
-tests:
-	@make -C tests tests
+dotests:
+	make -C tests tests
+
+tests: dotests
