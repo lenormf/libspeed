@@ -8,17 +8,19 @@
 #include "function.hpp"
 #include "macro_utils.hpp"
 
-#define FUNCTOR_CONSTNESS
 namespace speed {
 class deferObject {
         public:
-        typedef Function<void()> deferFunctionType;
-        typedef deferObject deferObjectType;
+	typedef Function<void()> deferFunctionType;
+        typedef deferFunctionType::Signature::Type deferFunctionSignatureType;
 
         private:
-        deferFunctionType FUNCTOR_CONSTNESS &_func;
+        deferFunctionType _func;
 
-        explicit deferObject(deferFunctionType FUNCTOR_CONSTNESS &f) :
+        explicit deferObject(deferFunctionType &f) :
+                _func(f) {}
+
+        explicit deferObject(deferFunctionSignatureType f) :
                 _func(f) {}
 
         public:
@@ -26,19 +28,27 @@ class deferObject {
                 _func();
         }
 
-        friend deferObjectType Defer(deferFunctionType FUNCTOR_CONSTNESS &);
-};
+        static deferObject Defer(deferFunctionType &f) {
+ 	       return deferObject(f);
+	}
 
-deferObject::deferObjectType Defer(deferObject::deferFunctionType FUNCTOR_CONSTNESS &f) {
-        return deferObject::deferObjectType(f);
-}
+        static deferObject Defer(deferFunctionSignatureType f) {
+        	return deferObject(f);
+	}
+};
 }
 
 #define ANONYMOUS_VARIABLE_PREFIX $_DEFER_
 #define ANONYMOUS_VARIABLE_NAME CONCAT(ANONYMOUS_VARIABLE_PREFIX, __COUNTER__)
 
+#if 0
 #if __cplusplus > 201100L
-#define defer(scope) speed::deferObject::deferObjectType ANONYMOUS_VARIABLE_NAME = speed::Defer([]()scope)
-#else
-#define defer(func_addr) speed::deferObject::deferObjectType ANONYMOUS_VARIABLE_NAME = speed::Defer(func_addr)
+#define defer(scope) speed::deferObject ANONYMOUS_VARIABLE_NAME = speed::Defer([]()scope)
+
+#define defer(func_addr, args...) speed::deferObject ANONYMOUS_VARIABLE_NAME = speed::deferObject::Defer(speed::Bind(func_addr, ##args))
+
 #endif
+
+#endif
+
+#define defer(func_addr) speed::deferObject ANONYMOUS_VARIABLE_NAME = speed::deferObject::Defer(func_addr)

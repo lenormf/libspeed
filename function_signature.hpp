@@ -10,10 +10,10 @@
 template<>
 template<TEMPLATE_ARGUMENTS>
 struct FunctionSignature<R(FUNCTION_TYPES)> {
-	typedef R (*type)(FUNCTION_TYPES);
+	typedef R (*Type)(FUNCTION_TYPES);
 
-	typedef R ret;
-	typedef FUNCTION_TYPESLIST params;
+	typedef R Ret;
+	typedef FUNCTION_TYPESLIST Params;
 };
 
 #undef TEMPLATE_ARGUMENTS

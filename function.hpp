@@ -38,6 +38,8 @@ class Function<R(FUNCTION_TYPES)> {
 	ICallable *_caller;
 
 	public:
+		typedef FunctionSignature<R(FUNCTION_TYPES)> Signature;
+
 		Function() {
 			_caller = 0;
 		}
@@ -89,6 +91,8 @@ class Function<R(FUNCTION_TYPES)> {
 
 #ifndef __FUNCTION_H__
 #define __FUNCTION_H__
+
+#include "function_signature.hpp"
 
 namespace speed {
 template<typename T>
