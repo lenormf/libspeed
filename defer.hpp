@@ -15,12 +15,12 @@ class deferObject {
         typedef deferFunctionType::Signature::Type deferFunctionSignatureType;
 
         private:
-        deferFunctionType _func;
+        deferFunctionType const _func;
 
-        explicit deferObject(deferFunctionType &f) :
+        explicit deferObject(deferFunctionType const &f) :
                 _func(f) {}
 
-        explicit deferObject(deferFunctionSignatureType f) :
+        explicit deferObject(deferFunctionSignatureType const f) :
                 _func(f) {}
 
         public:
@@ -28,11 +28,11 @@ class deferObject {
                 _func();
         }
 
-        static deferObject Defer(deferFunctionType &f) {
+        static deferObject Defer(deferFunctionType const &f) {
  	       return deferObject(f);
 	}
 
-        static deferObject Defer(deferFunctionSignatureType f) {
+        static deferObject Defer(deferFunctionSignatureType const f) {
         	return deferObject(f);
 	}
 };

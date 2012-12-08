@@ -75,7 +75,7 @@ class Function<R(FUNCTION_TYPES)> {
 			return *this;
 		}
 
-		R operator()(FUNCTOR_TYPES_VARS) {
+		R operator()(FUNCTOR_TYPES_VARS) const {
 			if (_caller)
 				return _caller->call(FUNCTOR_VARS);
 
