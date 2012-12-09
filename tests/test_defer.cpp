@@ -3,14 +3,19 @@
  * by lenorm_f
  */
 
+#include <iostream>
 #include <defer.hpp>
 
+void empty() {}
+
+void p1() {
+	std::cout << 1;
+}
+
 int main() {
-	int n = 0;
+	defer(&empty);
 
-	defer({
-	      //n = 0x2A;
-	});
-
-	return n;
+	{
+		defer(&p1);
+	}
 }

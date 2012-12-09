@@ -38,17 +38,14 @@ class deferObject {
 };
 }
 
-#define ANONYMOUS_VARIABLE_PREFIX $_DEFER_
-#define ANONYMOUS_VARIABLE_NAME CONCAT(ANONYMOUS_VARIABLE_PREFIX, __COUNTER__)
-
 #if 0
 #if __cplusplus > 201100L
-#define defer(scope) speed::deferObject ANONYMOUS_VARIABLE_NAME = speed::Defer([]()scope)
+#define defer(scope) speed::deferObject GEN_ANONYMOUS_VARIABLE = speed::Defer([]()scope)
 
-#define defer(func_addr, args...) speed::deferObject ANONYMOUS_VARIABLE_NAME = speed::deferObject::Defer(speed::Bind(func_addr, ##args))
-
-#endif
+#define defer(func_addr, args...) speed::deferObject GEN_ANONYMOUS_VARIABLE = speed::deferObject::Defer(speed::Bind(func_addr, ##args))
 
 #endif
 
-#define defer(func_addr) speed::deferObject ANONYMOUS_VARIABLE_NAME = speed::deferObject::Defer(func_addr)
+#endif
+
+#define defer(func_addr) speed::deferObject GEN_ANONYMOUS_VARIABLE = speed::deferObject::Defer(func_addr)
